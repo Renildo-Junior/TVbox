@@ -46,6 +46,23 @@ test('normalizarConfig completa chaves que faltam com o padrão', () => {
   assert.strictEqual(cfg.bios[1].pasta, 'C:\\Users\\tv\\Jogos\\bios\\ps2');
 });
 
+test('normalizarConfig troca o cartão Android TV antigo pela tela de TV e mantém os outros apps', () => {
+  const antigo = {
+    apps: [
+      { id: 'androidtv', nome: 'Android TV', tipo: 'comando', comando: 'start "" "C:\\BlissOS\\nao-existe.exe"' },
+      { id: 'meu', nome: 'Meu app', tipo: 'programa', exe: 'C:\\x.exe' },
+    ],
+  };
+  const cfg = bib.normalizarConfig(antigo, {}, padrao);
+  const android = cfg.apps.find((a) => a.id === 'androidtv');
+  assert.strictEqual(android.tipo, 'tela');
+  assert.strictEqual(android.tela, 'tv');
+  assert.ok(cfg.apps.some((a) => a.id === 'meu'));
+  // config sem o cartão: ele volta, em primeiro
+  const semCartao = bib.normalizarConfig({ apps: [{ id: 'meu', nome: 'Meu', tipo: 'programa' }] }, {}, padrao);
+  assert.strictEqual(semCartao.apps[0].id, 'androidtv');
+});
+
 test('expandirDestino: {documentos}, {emu:x} e emulador ausente', () => {
   const dirs = { retroarch: 'C:\\RA' };
   const dir = (k) => dirs[k] || null;
