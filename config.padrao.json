@@ -1,0 +1,91 @@
+{
+  "titulo": "TV Box",
+  "telaCheia": true,
+  "iniciarComWindows": false,
+
+  "emuladores": {
+    "retroarch": ["C:\\RetroArch-Win64\\retroarch.exe", "C:\\Emuladores\\RetroArch\\retroarch.exe", "%APPDATA%\\RetroArch\\retroarch.exe"],
+    "duckstation": ["C:\\Emuladores\\DuckStation\\duckstation-qt-x64-ReleaseLTCG.exe", "%LOCALAPPDATA%\\Programs\\DuckStation\\duckstation-qt-x64-ReleaseLTCG.exe"],
+    "pcsx2": ["C:\\Program Files\\PCSX2\\pcsx2-qt.exe", "C:\\Emuladores\\PCSX2\\pcsx2-qt.exe"],
+    "ppsspp": ["C:\\Program Files\\PPSSPP\\PPSSPPWindows64.exe", "C:\\Emuladores\\PPSSPP\\PPSSPPWindows64.exe"],
+    "dolphin": ["C:\\Program Files\\Dolphin-x64\\Dolphin.exe", "C:\\Program Files\\Dolphin\\Dolphin.exe", "C:\\Emuladores\\Dolphin-x64\\Dolphin.exe"]
+  },
+
+  "sairSegurandoMs": 1500,
+  "atalhoFechar": "Control+Alt+Backspace",
+  "controles": {},
+
+  "navegador": [
+    "%ProgramFiles(x86)%\\Microsoft\\Edge\\Application\\msedge.exe",
+    "%ProgramFiles%\\Microsoft\\Edge\\Application\\msedge.exe",
+    "%ProgramFiles%\\Google\\Chrome\\Application\\chrome.exe",
+    "%ProgramFiles(x86)%\\Google\\Chrome\\Application\\chrome.exe",
+    "%LOCALAPPDATA%\\Google\\Chrome\\Application\\chrome.exe"
+  ],
+
+  "tv": {
+    "perfil": "%LOCALAPPDATA%\\TVBox\\navegador",
+    "apps": [
+      { "id": "youtube", "nome": "YouTube", "icone": "▶️", "cor": "#ff0033", "url": "https://www.youtube.com/tv",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; Xbox; Xbox Series X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.82 Safari/537.36 Edge/20.02" },
+      { "id": "netflix", "nome": "Netflix", "icone": "🎬", "cor": "#e50914", "url": "https://www.netflix.com/browse" },
+      { "id": "spotify", "nome": "Spotify", "icone": "🎵", "cor": "#1db954", "url": "https://open.spotify.com" },
+      { "id": "prime", "nome": "Prime Video", "icone": "📦", "cor": "#00a8e1", "url": "https://www.primevideo.com" },
+      { "id": "disney", "nome": "Disney+", "icone": "🏰", "cor": "#113ccf", "url": "https://www.disneyplus.com" },
+      { "id": "hbomax", "nome": "HBO Max", "icone": "🎞️", "cor": "#5822b4", "url": "https://play.hbomax.com" },
+      { "id": "globoplay", "nome": "Globoplay", "icone": "🌐", "cor": "#fb0234", "url": "https://globoplay.globo.com" },
+      { "id": "twitch", "nome": "Twitch", "icone": "💬", "cor": "#9146ff", "url": "https://www.twitch.tv" },
+      { "id": "pluto", "nome": "Pluto TV (grátis)", "icone": "🪐", "cor": "#2c2c2c", "url": "https://pluto.tv/br/live-tv" },
+      { "id": "web", "nome": "Navegador", "icone": "🔎", "cor": "#30363d", "url": "https://www.google.com" }
+    ]
+  },
+
+  "bios": [
+    { "id": "ps1", "nome": "PlayStation", "pasta": "%USERPROFILE%\\Jogos\\bios\\ps1", "extensoes": [".bin"],
+      "destinos": ["{documentos}\\DuckStation\\bios", "{emu:duckstation}\\bios", "{emu:retroarch}\\system"] },
+    { "id": "ps2", "nome": "PlayStation 2", "pasta": "%USERPROFILE%\\Jogos\\bios\\ps2", "extensoes": [".bin", ".rom0", ".mec", ".nvm"],
+      "destinos": ["{documentos}\\PCSX2\\bios", "{emu:pcsx2}\\bios"] },
+    { "id": "arcade", "nome": "Arcade", "pasta": "%USERPROFILE%\\Jogos\\bios\\arcade", "extensoes": [".zip", ".7z"],
+      "destinos": ["{emu:retroarch}\\system\\fbneo"] }
+  ],
+
+  "apps": [
+    { "id": "androidtv", "nome": "Android TV", "icone": "📺", "cor": "#3ddc84", "tipo": "tela", "tela": "tv" },
+    { "id": "retroarch", "nome": "RetroArch", "icone": "🕹️", "cor": "#7b5cff", "tipo": "programa", "emulador": "retroarch", "args": ["-f"] },
+    { "id": "pcsx2", "nome": "PCSX2 (PS2)", "icone": "🎮", "cor": "#1f6feb", "tipo": "programa", "emulador": "pcsx2", "args": ["-fullscreen"] },
+    { "id": "duckstation", "nome": "DuckStation (PS1)", "icone": "💿", "cor": "#8b949e", "tipo": "programa", "emulador": "duckstation", "args": ["-fullscreen"] }
+  ],
+
+  "sistemas": [
+    { "id": "ps2", "nome": "PlayStation 2", "emulador": "pcsx2", "bios": "ps2", "pasta": "%USERPROFILE%\\Jogos\\ps2",
+      "extensoes": [".iso", ".chd", ".cso", ".gz"], "args": ["-batch", "-nogui", "-fullscreen", "--", "{rom}"] },
+
+    { "id": "ps1", "nome": "PlayStation", "emulador": "duckstation", "bios": "ps1", "pasta": "%USERPROFILE%\\Jogos\\ps1",
+      "extensoes": [".cue", ".chd", ".pbp", ".m3u", ".ecm"], "args": ["-batch", "-fullscreen", "{rom}"],
+      "alternativa": { "emulador": "retroarch", "args": ["-f", "-L", "{dir}\\cores\\pcsx_rearmed_libretro.dll", "{rom}"] } },
+
+    { "id": "psp", "nome": "PSP", "emulador": "ppsspp", "pasta": "%USERPROFILE%\\Jogos\\psp",
+      "extensoes": [".iso", ".cso", ".chd"], "args": ["--fullscreen", "{rom}"] },
+
+    { "id": "gc", "nome": "GameCube / Wii", "emulador": "dolphin", "pasta": "%USERPROFILE%\\Jogos\\gamecube",
+      "extensoes": [".iso", ".gcm", ".rvz", ".wbfs", ".ciso"], "args": ["-b", "-e", "{rom}"] },
+
+    { "id": "n64", "nome": "Nintendo 64", "emulador": "retroarch", "pasta": "%USERPROFILE%\\Jogos\\n64",
+      "extensoes": [".z64", ".n64", ".v64", ".zip"], "args": ["-f", "-L", "{dir}\\cores\\mupen64plus_next_libretro.dll", "{rom}"] },
+
+    { "id": "snes", "nome": "Super Nintendo", "emulador": "retroarch", "pasta": "%USERPROFILE%\\Jogos\\snes",
+      "extensoes": [".sfc", ".smc", ".zip"], "args": ["-f", "-L", "{dir}\\cores\\snes9x_libretro.dll", "{rom}"] },
+
+    { "id": "nes", "nome": "Nintendinho (NES)", "emulador": "retroarch", "pasta": "%USERPROFILE%\\Jogos\\nes",
+      "extensoes": [".nes", ".zip"], "args": ["-f", "-L", "{dir}\\cores\\fceumm_libretro.dll", "{rom}"] },
+
+    { "id": "megadrive", "nome": "Mega Drive / Master System", "emulador": "retroarch", "pasta": "%USERPROFILE%\\Jogos\\megadrive",
+      "extensoes": [".md", ".gen", ".bin", ".smd", ".sms", ".gg", ".zip"], "args": ["-f", "-L", "{dir}\\cores\\genesis_plus_gx_libretro.dll", "{rom}"] },
+
+    { "id": "gba", "nome": "Game Boy / GBA", "emulador": "retroarch", "pasta": "%USERPROFILE%\\Jogos\\gba",
+      "extensoes": [".gba", ".gb", ".gbc", ".zip"], "args": ["-f", "-L", "{dir}\\cores\\mgba_libretro.dll", "{rom}"] },
+
+    { "id": "arcade", "nome": "Arcade (FBNeo)", "emulador": "retroarch", "pasta": "%USERPROFILE%\\Jogos\\arcade",
+      "extensoes": [".zip", ".7z"], "profundidade": 0, "args": ["-f", "-L", "{dir}\\cores\\fbneo_libretro.dll", "{rom}"] }
+  ]
+}

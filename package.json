@@ -1,0 +1,56 @@
+{
+  "name": "tvbox",
+  "productName": "TV Box",
+  "version": "0.1.0",
+  "description": "Launcher em tela cheia, navegável por controle, para transformar um PC antigo em central de TV (Android TV) e jogos (emuladores até PS2).",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/*.test.js",
+    "dist": "electron-builder --win portable nsis",
+    "dist:portatil": "electron-builder --win portable"
+  },
+  "build": {
+    "appId": "local.renildo.tvbox",
+    "productName": "TV Box",
+    "files": [
+      "main.js",
+      "preload.js",
+      "config.padrao.json",
+      "lib/**",
+      "renderer/**"
+    ],
+    "extraResources": [
+      {
+        "from": "scripts",
+        "to": "scripts"
+      },
+      {
+        "from": "docs",
+        "to": "docs"
+      }
+    ],
+    "win": {
+      "target": [
+        "portable",
+        "nsis"
+      ]
+    },
+    "portable": {
+      "artifactName": "TVBox-${version}-portatil.exe"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "TVBox-${version}-instalador.exe"
+    },
+    "directories": {
+      "output": "dist"
+    }
+  },
+  "devDependencies": {
+    "electron": "^45.5.0",
+    "electron-builder": "^26.18.0"
+  }
+}

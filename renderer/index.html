@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' file: data:; style-src 'self'; script-src 'self'">
+  <title>TV Box</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1 id="titulo">TV Box</h1>
+    <div id="relogio" aria-live="off"></div>
+  </header>
+  <main id="linhas" aria-label="Menu"></main>
+  <footer id="rodape"></footer>
+  <div id="aviso" role="status" hidden></div>
+  <div id="modal" role="dialog" aria-modal="true" hidden>
+    <div class="caixa">
+      <p id="modal-texto"></p>
+      <div class="botoes">
+        <button id="modal-sim">Sim</button>
+        <button id="modal-nao">Não</button>
+      </div>
+    </div>
+  </div>
+  <div id="ajuda" class="sobreposicao" role="dialog" aria-modal="true" aria-label="Comandos" hidden>
+    <div class="caixa larga">
+      <h2>Comandos — controle e teclado</h2>
+      <div class="colunas">
+        <table id="ajuda-tabela"></table>
+        <ul id="ajuda-app"></ul>
+      </div>
+      <p class="dica">A, B ou X (Enter / Esc / F1) fecha esta tela.</p>
+    </div>
+  </div>
+  <div id="captura" class="sobreposicao" role="dialog" aria-modal="true" aria-label="Configurar controle" hidden>
+    <div class="caixa">
+      <h2>🎮 Configurar controle</h2>
+      <p id="captura-progresso" class="dica"></p>
+      <p id="captura-texto" class="grande"></p>
+      <p id="captura-rodape" class="dica"></p>
+    </div>
+  </div>
+  <script src="../lib/controles.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
