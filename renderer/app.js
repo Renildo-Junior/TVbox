@@ -128,6 +128,7 @@ async function carregar() {
   document.title = dados.titulo;
   el('titulo').textContent = dados.titulo;
   estado.controles = dados.controles || {};
+  pintarLateral(dados);
 
   const linhas = [];
   linhas.push({
@@ -537,9 +538,43 @@ function passoCaptura(t) {
   }
 }
 
-// ---------- relógio ----------
+// ---------- barra lateral (usuário, relógio, data, versão) ----------
+function iniciais(nome) {
+  const p = String(nome || '').trim().split(/\s+/).filter(Boolean);
+  if (!p.length) return '🙂';
+  return (p[0][0] + (p.length > 1 ? p[p.length - 1][0] : '')).toUpperCase();
+}
+
+function pintarLateral(dados) {
+  const usuario = dados.usuario || 'Jogador';
+  el('usuario').textContent = usuario;
+  el('avatar').textContent = iniciais(usuario);
+  el('versao').textContent = `${dados.titulo} · versão ${dados.versao || '?'}`;
+  el('desenvolvedor').textContent = dados.desenvolvedor || 'renildo.junior';
+  const n = dados.totalJogos || 0;
+  el('lateral-jogos').textContent = `🕹️ ${n} ${n === 1 ? 'jogo' : 'jogos'} na biblioteca`;
+}
+
+function pintarControles() {
+  const lista = pads();
+  const alvo = el('lateral-controle');
+  if (!lista.length) {
+    alvo.textContent = '🎮 Nenhum controle';
+    alvo.classList.remove('ligado');
+    return;
+  }
+  const nome = lista[0].id.replace(/\s*\(.*\)\s*$/, '') || 'controle';
+  alvo.textContent = lista.length > 1 ? `🎮 ${lista.length} controles conectados` : `🎮 ${nome}`;
+  alvo.classList.add('ligado');
+}
+window.addEventListener('gamepadconnected', pintarControles);
+window.addEventListener('gamepaddisconnected', pintarControles);
+
 function relogio() {
-  el('relogio').textContent = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  const agora = new Date();
+  el('relogio').textContent = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  const data = agora.toLocaleDateString('pt-BR', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+  el('data').textContent = data.charAt(0).toUpperCase() + data.slice(1);
 }
 
 // Ao voltar de um emulador, ignora o botão que ainda estiver apertado (evita reabrir o jogo).
@@ -552,7 +587,8 @@ window.tvbox.aoVoltar(() => {
 window.tvbox.aoSair(() => { estado.pausado = true; });
 
 relogio();
-setInterval(relogio, 10000);
+setInterval(relogio, 5000);
+pintarControles();
 document.body.dataset.tela = 'inicio';
 desenharRodape();
 carregar();

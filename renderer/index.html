@@ -7,12 +7,32 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1 id="titulo">TV Box</h1>
-    <div id="relogio" aria-live="off"></div>
-  </header>
-  <main id="linhas" aria-label="Menu"></main>
-  <footer id="rodape"></footer>
+  <aside id="lateral" aria-label="Painel">
+    <div class="perfil">
+      <div id="avatar" class="avatar">RJ</div>
+      <div class="ola">Olá,</div>
+      <div id="usuario" class="usuario">Renildo Junior</div>
+    </div>
+    <div class="hora">
+      <div id="relogio" aria-live="off"></div>
+      <div id="data"></div>
+    </div>
+    <div class="info">
+      <div id="lateral-jogos"></div>
+      <div id="lateral-controle">🎮 Nenhum controle</div>
+    </div>
+    <div class="creditos">
+      <div id="versao">TV Box</div>
+      <div>Desenvolvido por <strong id="desenvolvedor">renildo.junior</strong></div>
+    </div>
+  </aside>
+  <div id="conteudo">
+    <header>
+      <h1 id="titulo">TV Box</h1>
+    </header>
+    <main id="linhas" aria-label="Menu"></main>
+    <footer id="rodape"></footer>
+  </div>
   <div id="aviso" role="status" hidden></div>
   <div id="modal" role="dialog" aria-modal="true" hidden>
     <div class="caixa">

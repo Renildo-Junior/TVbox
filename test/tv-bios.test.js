@@ -44,6 +44,15 @@ test('normalizarConfig completa chaves que faltam com o padrão', () => {
   assert.strictEqual(cfg.tv.perfil, 'C:\\Users\\tv\\AppData\\Local\\TVBox\\navegador');
   assert.deepStrictEqual(cfg.bios.map((b) => b.id), ['ps1', 'ps2', 'arcade']);
   assert.strictEqual(cfg.bios[1].pasta, 'C:\\Users\\tv\\Jogos\\bios\\ps2');
+  // config antigo, sem usuário: barra lateral usa o padrão
+  assert.strictEqual(cfg.usuario, 'Renildo Junior');
+  assert.strictEqual(cfg.desenvolvedor, 'renildo.junior');
+});
+
+test('perfil do navegador é fixo em disco (login não se perde ao desligar)', () => {
+  const args = bib.argsNavegador({ id: 'netflix', url: 'https://www.netflix.com' }, 'C:\\P\\nav');
+  assert.ok(args.includes('--user-data-dir=C:\\P\\nav'));
+  assert.ok(!args.some((a) => /incognito|inprivate|guest/i.test(a)), 'não pode abrir em modo anônimo');
 });
 
 test('normalizarConfig troca o cartão Android TV antigo pela tela de TV e mantém os outros apps', () => {
